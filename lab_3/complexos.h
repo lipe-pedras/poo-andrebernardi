@@ -1,32 +1,36 @@
-#include<vector>
-
-using namespace std;
-
+// complexos.h
 #ifndef COMPLEXOS_H
 #define COMPLEXOS_H
 
-class Complexo
-{
-    private:
-        double r, c;
-        static int count;
+#include <vector>
+#include <string>
 
-    protected:
-    vector<double> polar(Complexo);
-    Complexo retangular(vector<double>);
+class Complexo {
+private:
+    double r; // Real part
+    double c; // Complex part
+    static unsigned int count; // Static member to count instances
 
-    public:
-        Complexo soma(Complexo);
-        Complexo subtracao(Complexo);
-        Complexo multiplicacao(Complexo);
-        Complexo divisao(Complexo);
-        
-        Complexo();
-        Complexo(double, double);
+public:
+    Complexo();
+    Complexo(double r, double c);
+    ~Complexo();
 
-        double modulo();
-        void printRetangular();
-        void printNumberOfComplexes();
+    std::vector<double> polar() const; // No need to pass Complexo here
+    static Complexo retangular(const std::vector<double>& vetor); // Static method
+
+    double getReal() const { return r; }
+    double getComplex() const { return c; }
+
+    Complexo soma(const Complexo& _c2) const;
+    Complexo subtracao(const Complexo& _c2) const;
+    Complexo multiplicacao(const Complexo& _c2) const;
+    Complexo divisao(const Complexo& _c2) const;
+
+    double modulo() const;
+    std::string printRetangular() const;
+
+    static int printNumberOfComplexes();
 };
 
 #endif
