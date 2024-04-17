@@ -41,19 +41,19 @@ Complexo Complexo::retangular(const std::vector<double>& vetor) {
     return Complexo(realPart, imagPart);
 }
 
-Complexo Complexo::soma(const Complexo& _c2) const {
+Complexo Complexo::operator+(const Complexo& _c2) const {
     double realPart = r + _c2.r;
     double imagPart = c + _c2.c;
     return Complexo(realPart, imagPart);
 }
 
-Complexo Complexo::subtracao(const Complexo& _c2) const {
+Complexo Complexo::operator-(const Complexo& _c2) const {
     double realPart = r - _c2.r;
     double imagPart = c - _c2.c;
     return Complexo(realPart, imagPart);
 }
 
-Complexo Complexo::multiplicacao(const Complexo& _c2) const {
+Complexo Complexo::operator*(const Complexo& _c2) const {
     std::vector<double> c1_polar = polar();
     std::vector<double> c2_polar = _c2.polar();
     std::vector<double> c3;
@@ -62,7 +62,7 @@ Complexo Complexo::multiplicacao(const Complexo& _c2) const {
     return retangular(c3);
 }
 
-Complexo Complexo::divisao(const Complexo& _c2) const {
+Complexo Complexo::operator/(const Complexo& _c2) const {
     std::vector<double> c1_polar = polar();
     std::vector<double> c2_polar = _c2.polar();
     std::vector<double> c3;

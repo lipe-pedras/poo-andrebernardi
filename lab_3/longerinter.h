@@ -22,8 +22,8 @@ public:
 
     void readFromKeyboard();      // Ler número do teclado
     void print() const;           // Imprimir número
-    LongInteger add(const LongInteger& other) const;  // Somar dois números
-    LongInteger subtract(const LongInteger& other) const; // Subtrair dois números
+    LongInteger operator+(const LongInteger& other) const;  // Somar dois números
+    LongInteger operator-(const LongInteger& other) const; // Subtrair dois números
 };
 
 #endif

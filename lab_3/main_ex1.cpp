@@ -12,16 +12,16 @@ int main()
 
     Complexo c3;
 
-    c3 = c1.soma(c2);
+    c3 = c1 + (c2);
     cout << "Soma: " << c3.printRetangular() << "\n";
 
-    c3 = c1.subtracao(c2);
+    c3 = c1 - (c2);
     cout << "Subtracao: " << c3.printRetangular() << "\n";
 
-    c3 = c1.multiplicacao(c2);
+    c3 = c1 * (c2);
     cout << "Multiplicacao: " << c3.printRetangular() << "\n";
 
-    c3 = c1.divisao(c2);
+    c3 = c1 / (c2);
     cout << "Divisao: " << c3.printRetangular() << "\n";
 
     cout << "Modulo c1: " << c1.modulo() << "\n";

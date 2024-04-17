@@ -22,10 +22,10 @@ public:
     double getReal() const { return r; }
     double getComplex() const { return c; }
 
-    Complexo soma(const Complexo& _c2) const;
-    Complexo subtracao(const Complexo& _c2) const;
-    Complexo multiplicacao(const Complexo& _c2) const;
-    Complexo divisao(const Complexo& _c2) const;
+    Complexo operator+(const Complexo& _c2) const;
+    Complexo operator-(const Complexo& _c2) const;
+    Complexo operator*(const Complexo& _c2) const;
+    Complexo operator/(const Complexo& _c2) const;
 
     double modulo() const;
     std::string printRetangular() const;

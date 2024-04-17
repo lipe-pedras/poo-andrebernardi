@@ -78,7 +78,7 @@ int LongInteger::bigger(const LongInteger &other) const
     }
 }
 
-LongInteger LongInteger::add(const LongInteger &other) const
+LongInteger LongInteger::operator+(const LongInteger &other) const
 {
     LongInteger soma;
     int result = 0;
@@ -96,25 +96,25 @@ LongInteger LongInteger::add(const LongInteger &other) const
     return soma;
 }
 
-LongInteger LongInteger::subtract(const LongInteger &other) const
+LongInteger LongInteger::operator-(const LongInteger &other) const
 {
     if (sign == 1 && other.sign == -1)
     {
         LongInteger fake = other;
         fake.sign = 1;
-        return add(fake);
+        return *this + fake;
     } if (sign == -1 && other.sign == 1)
     {
         LongInteger fake = *this;
         fake.sign = 1;
-        return fake.add(other);
+        return fake + other;
     } if (sign == -1 && other.sign == -1)
     {
         LongInteger fake = *this;
         LongInteger fake_other = other;
         fake.sign = 1;
         fake_other.sign = 1;
-        return fake_other.subtract(fake);
+        return fake_other - fake;
     }
     else
     {
@@ -142,7 +142,7 @@ LongInteger LongInteger::subtract(const LongInteger &other) const
         }
         else if (compare == -1)
         {
-            LongInteger sub = other.subtract(*this);
+            LongInteger sub = other - *this;
             sub.sign = -1;
             return sub;
         }
