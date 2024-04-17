@@ -1,4 +1,4 @@
-#include "triangulo.cpp"
+#include "triangulo.h"
 
 using namespace std;
 
