@@ -1,4 +1,5 @@
 #include "complexos.h"
+#include <iostream>
 
 using namespace std;
 
@@ -6,7 +7,6 @@ int main()
 {
     Complexo c1;
     Complexo c2(2, 4);
-
     cout << "c1: " << c1.printRetangular() << "\n";
     cout << "c2: " << c2.printRetangular() << "\n";
 
