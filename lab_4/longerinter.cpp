@@ -59,12 +59,12 @@ void LongInteger::print() const
     }
 }
 
-int LongInteger::bigger(const LongInteger &other) const
+int LongInteger::operator>(const LongInteger &other) const
 {
     if (numDigits > other.numDigits)
         return 1;
     else if (numDigits < other.numDigits)
-        return -1;
+        return 0;
     else
     {
         for (int i = numDigits - 1; i >= 0; i--)
@@ -72,10 +72,35 @@ int LongInteger::bigger(const LongInteger &other) const
             if (digits[i] > other.digits[i])
                 return 1;
             else if (digits[i] < other.digits[i])
-                return -1;
+                return 0;
         }
         return 0;
     }
+}
+
+int LongInteger::operator<(const LongInteger &other) const
+{
+    return (other > *this);
+}
+
+int LongInteger::operator<=(const LongInteger &other) const
+{
+    return ((*this < other) || ((!(*this > other)) && (!(other > *this))));
+}
+
+int LongInteger::operator>=(const LongInteger &other) const
+{
+    return ((*this > other) || ((!(*this < other)) && (!(other < *this))));
+}
+
+int LongInteger::operator==(const LongInteger &other) const
+{
+    return ((*this > other) == 0) ? 1 : 0;
+}
+
+int LongInteger::operator!=(const LongInteger &other) const
+{
+    return ((*this > other) != 0) ? 1 : 0;
 }
 
 LongInteger LongInteger::operator+(const LongInteger &other) const
@@ -103,12 +128,14 @@ LongInteger LongInteger::operator-(const LongInteger &other) const
         LongInteger fake = other;
         fake.sign = 1;
         return *this + fake;
-    } if (sign == -1 && other.sign == 1)
+    }
+    if (sign == -1 && other.sign == 1)
     {
         LongInteger fake = *this;
         fake.sign = 1;
         return fake + other;
-    } if (sign == -1 && other.sign == -1)
+    }
+    if (sign == -1 && other.sign == -1)
     {
         LongInteger fake = *this;
         LongInteger fake_other = other;
@@ -118,7 +145,13 @@ LongInteger LongInteger::operator-(const LongInteger &other) const
     }
     else
     {
-        int compare = bigger(other);
+        int compare = *this > other;
+        if (*this > other)
+            compare = 1;
+        if (*this < other)
+            compare = -1;
+        if (*this == other)
+            compare = 0;
         if (compare == 1)
         {
             LongInteger sub;
@@ -152,4 +185,25 @@ LongInteger LongInteger::operator-(const LongInteger &other) const
             return sub;
         }
     }
+}
+
+std::ostream &operator<<(std::ostream &out, const LongInteger &num)
+{
+    if (num.sign == -1)
+        out << "-";
+
+    for (int i = 0; i < num.numDigits; i++)
+    {
+        out << num.digits[i];
+    }
+    return out;
+}
+
+// Função para leitura
+std::istream &operator>>(std::istream &in, LongInteger &num)
+{
+    string input;
+    in >> input;
+    num = LongInteger(input);
+    return in;
 }
