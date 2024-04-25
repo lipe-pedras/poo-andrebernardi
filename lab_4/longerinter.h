@@ -8,7 +8,7 @@
 
 class LongInteger {
 protected:
-    int bigger(const LongInteger& other) const;
+
 private:
     static const int MAX_DIGITS = 30;
     int digits[MAX_DIGITS]; // Armazenamento dos dígitos do número
@@ -24,6 +24,15 @@ public:
     void print() const;           // Imprimir número
     LongInteger operator+(const LongInteger& other) const;  // Somar dois números
     LongInteger operator-(const LongInteger& other) const; // Subtrair dois números
+    int operator>(const LongInteger& other) const;
+    int operator<(const LongInteger& other) const;
+    int operator>=(const LongInteger& other) const;
+    int operator<=(const LongInteger& other) const;
+    int operator==(const LongInteger& other) const;
+    int operator!=(const LongInteger& other) const;
+    friend std::ostream &operator<<(std::ostream &out, const LongInteger &num);
+    friend std::istream &operator>>(std::istream &in, LongInteger &num);
+
 };
 
 #endif
