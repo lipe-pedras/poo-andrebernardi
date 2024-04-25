@@ -1,5 +1,5 @@
 #include <iostream>
-#include "CFracao.cpp"
+#include "CFracao.h"
 using namespace std;
 
 int main() {

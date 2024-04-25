@@ -1,21 +1,26 @@
-#include "longerinter.cpp"
-
+#include "longerinter.h"
 using namespace std;
 
 int main()
 {
     LongInteger num1, num2;
 
-    cout << "entre com o numero\n";
+    cout << "Digite o primeiro numero.\n";
     cin >> num1;
-    cout << "entre com o outro numero\n";
+
+    cout << "Digite o segundo numero.\n";
     cin >> num2;
 
-    cout << "num1: " << num1 << endl;
-    cout << "num2: " << num2 << endl;
-    cout << num1 + num2 << endl;
-    cout << num1 - num2 << endl;
-    cout << "o maior eh " << ((num1 > num2) ? num1 : num2) << endl;
-    cout << "o menor eh " << ((num1 < num2) ? num1 : num2) << endl;
-    cout << ((num1 == num2) ? "sao iguais" : "nao sao iguais") << endl;
+    cout << endl
+         << endl
+         << "num1 = " << num1 << endl
+         << "num2 = " << num2 << endl
+         << "Soma: " << num1 + num2 << endl
+         << "Sub: " << num1 - num2 << endl
+         << "Maior: " << ((num1 > num2) ? num1 : num2) << endl
+         << "Menor: " << ((num1 < num2) ? num1 : num2) << endl
+         << "num1 >= num2 " << (num1 >= num2) << endl
+         << "num1 <= num2 " << (num1 <= num2) << endl
+         << "num1 != num2 " << (num1 != num2) << endl
+         << ((num1 == num2) ? "sao iguais" : "sao diferentes") << endl;
 }
