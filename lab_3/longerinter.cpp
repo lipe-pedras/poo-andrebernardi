@@ -103,12 +103,14 @@ LongInteger LongInteger::operator-(const LongInteger &other) const
         LongInteger fake = other;
         fake.sign = 1;
         return *this + fake;
-    } if (sign == -1 && other.sign == 1)
+    }
+    if (sign == -1 && other.sign == 1)
     {
         LongInteger fake = *this;
         fake.sign = 1;
         return fake + other;
-    } if (sign == -1 && other.sign == -1)
+    }
+    if (sign == -1 && other.sign == -1)
     {
         LongInteger fake = *this;
         LongInteger fake_other = other;
