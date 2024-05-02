@@ -51,7 +51,7 @@ Data &Data::operator++()
 Data Data::operator++(int)
 {
     Data temp{*this};
-    temp.setData(dia + 1, mes, ano);
+    setData(dia + 1, mes, ano);
     return temp;
 }
 
@@ -64,7 +64,7 @@ Data &Data::operator--()
 Data Data::operator--(int)
 {
     Data temp{*this};
-    temp.setData(dia - 1, mes, ano);
+    setData(dia - 1, mes, ano);
     return temp;
 }
 
