@@ -1,5 +1,5 @@
-#include "CFracao.cpp"
-#include "complexos.cpp"
+#include "CFracao.h"
+#include "complexos.h"
 #include <iostream>
 
 using namespace std;
