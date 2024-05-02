@@ -1,2 +1,11 @@
 #Ignore .vscode
 .vscode/
+
+#Ignore output folders
+*/output
+
+#Ignore build folders
+*/build
+
+#Ignore test files
+teste/

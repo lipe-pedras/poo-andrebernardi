@@ -59,12 +59,16 @@ void LongInteger::print() const
     }
 }
 
-int LongInteger::bigger(const LongInteger &other) const
+int LongInteger::operator>(const LongInteger &other) const
 {
-    if (numDigits > other.numDigits)
+    if (this->sign > other.sign)
+        return 1;
+    else if (this->sign < other.sign)
+        return 0;
+    else if (numDigits > other.numDigits)
         return 1;
     else if (numDigits < other.numDigits)
-        return -1;
+        return 0;
     else
     {
         for (int i = numDigits - 1; i >= 0; i--)
@@ -72,28 +76,69 @@ int LongInteger::bigger(const LongInteger &other) const
             if (digits[i] > other.digits[i])
                 return 1;
             else if (digits[i] < other.digits[i])
-                return -1;
+                return 0;
         }
         return 0;
     }
 }
 
+int LongInteger::operator<(const LongInteger &other) const
+{
+    return (other > *this);
+}
+
+int LongInteger::operator<=(const LongInteger &other) const
+{
+    return ((*this < other) || ((!(*this > other)) && (!(other > *this))));
+}
+
+int LongInteger::operator>=(const LongInteger &other) const
+{
+    return ((*this > other) || ((!(*this < other) || (other < *this))));
+}
+
+int LongInteger::operator==(const LongInteger &other) const
+{
+    return (!((*this < other) || (other < *this)));
+}
+
+int LongInteger::operator!=(const LongInteger &other) const
+{
+    return (!(*this == other));
+}
+
 LongInteger LongInteger::operator+(const LongInteger &other) const
 {
-    LongInteger soma;
-    int result = 0;
-    int next = 0;
-    int maxd = max(numDigits, other.numDigits);
-
-    for (int i = 0; i < maxd || next; i++)
+    if (((sign > 0) && (other.sign > 0)) || ((sign < 0) && (other.sign < 0)))
     {
-        result = (digits[i] * sign + other.digits[i] * other.sign + next);
-        soma.digits[i] = result % 10;
-        next = result / 10;
-        soma.numDigits++;
-    }
+        LongInteger soma;
+        int result = 0;
+        int next = 0;
+        int maxd = max(numDigits, other.numDigits);
 
-    return soma;
+        for (int i = 0; i < maxd || next; i++)
+        {
+            result = (digits[i] + other.digits[i] + next);
+            soma.digits[i] = result % 10;
+            next = result / 10;
+            soma.numDigits++;
+        }
+
+        if ((sign < 0) && (other.sign < 0))
+            soma.sign = -1;
+
+        return soma;
+    }
+    else if ((sign > 0) && (other.sign < 0))
+    {
+        LongInteger fake = other;
+        fake.sign = 1;
+        return *this - fake;
+    }
+    else
+    {
+        return other - *this;
+    }
 }
 
 LongInteger LongInteger::operator-(const LongInteger &other) const
@@ -108,7 +153,9 @@ LongInteger LongInteger::operator-(const LongInteger &other) const
     {
         LongInteger fake = *this;
         fake.sign = 1;
-        return fake + other;
+        fake = fake + other;
+        fake.sign = -1;
+        return fake;
     }
     if (sign == -1 && other.sign == -1)
     {
@@ -120,14 +167,20 @@ LongInteger LongInteger::operator-(const LongInteger &other) const
     }
     else
     {
-        int compare = bigger(other);
+        int compare;
+        if (*this > other)
+            compare = 1;
+        if (*this < other)
+            compare = -1;
+        if (*this == other)
+            compare = 0;
         if (compare == 1)
         {
             LongInteger sub;
             int result = 0;
             int empresta = 0;
 
-            for (int i = numDigits - 1; i >= 0; i--)
+            for (int i = 0; i < numDigits; i++)
             {
                 result = digits[i] - other.digits[i] - empresta;
                 if (result < 0)
@@ -154,4 +207,25 @@ LongInteger LongInteger::operator-(const LongInteger &other) const
             return sub;
         }
     }
+}
+
+std::ostream &operator<<(std::ostream &out, const LongInteger &num)
+{
+    if (num.sign == -1)
+        out << "-";
+
+    for (int i = num.numDigits - 1; i >= 0; i--)
+    {
+        out << num.digits[i];
+    }
+    return out;
+}
+
+// Função para leitura
+std::istream &operator>>(std::istream &in, LongInteger &num)
+{
+    string input;
+    in >> input;
+    num = LongInteger(input);
+    return in;
 }
