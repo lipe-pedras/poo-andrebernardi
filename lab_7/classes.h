@@ -135,3 +135,105 @@ public:
 
     string Cidade;
 };
+
+// exs 2
+class Ponto
+{
+public:
+    double x, y;
+    Ponto()
+    {
+        cin >> *this;
+    }
+
+    virtual ~Ponto() {};
+
+    virtual void imprime()
+    {
+        cout << *this;
+    }
+
+    friend ostream &operator<<(ostream &os, const Ponto &p)
+    {
+        os << "(" << p.x << ", " << p.y << ")";
+        return os;
+    }
+
+    friend istream &operator>>(istream &is, Ponto &p)
+    {
+        cout << "Entre com os valores de X e Y." << endl;
+        is >> p.x >> p.y;
+        return is;
+    }
+};
+
+class Circulo : public Ponto
+{
+public:
+    double raio;
+    Circulo()
+    {
+        cin >> *this;
+    }
+
+    virtual ~Circulo() {};
+
+    virtual void imprime()
+    {
+        cout << *this;
+    }
+
+    virtual double area() const
+    {
+        return M_PI * raio * raio;
+    }
+
+    friend ostream &operator<<(ostream &os, const Circulo &c)
+    {
+        os << "Centro: " << static_cast<Ponto>(c) << ", Raio: " << c.raio;
+        return os;
+    }
+
+    friend istream &operator>>(istream &is, Circulo &c)
+    {
+        cout << "Entre com o valor do Raio." << endl;
+        is >> c.raio;
+        return is;
+    }
+};
+
+class Cilindro : public Circulo
+{
+public:
+    double altura;
+    Cilindro()
+    {
+        cin >> *this;
+    }
+
+    virtual ~Cilindro() {};
+
+    virtual void imprime()
+    {
+        cout << *this;
+    }
+
+     virtual double volume() const
+    {
+        return area() * altura;
+    }
+
+    friend ostream &operator<<(ostream &os, const Cilindro &c)
+    {
+        os << "Base = { " << static_cast<Circulo>(c) << " } | Altura: " << c.altura;
+        return os;
+    }
+
+    friend istream &operator>>(istream &is, Cilindro &c)
+    {
+        cout << "Entre com a altura." << endl;
+        is >> c.altura;
+        return is;
+    }
+};
+
