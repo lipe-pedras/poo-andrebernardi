@@ -1,4 +1,4 @@
-#include "polinomio.cpp"
+#include "polinomio.h"
 #include <iostream>
 
 using namespace std;
