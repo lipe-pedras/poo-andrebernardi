@@ -1,5 +1,5 @@
 #include <iostream>
-#include "pilha.cpp"
+#include "pilha.h"
 
 using namespace std;
 
