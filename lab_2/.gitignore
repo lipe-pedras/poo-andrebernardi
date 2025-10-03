@@ -1,0 +1,25 @@
+# Build artifacts
+build/
+*.o
+*.exe
+
+# Editor files
+*.swp
+*.swo
+*~
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.cbp
+*.depend
+*.layout
+
+# Compiled executables
+main
+fraction_demo
+rectangle_demo

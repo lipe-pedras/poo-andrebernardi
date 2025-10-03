@@ -1,0 +1,42 @@
+# Build directories
+build/
+bin/
+obj/
+
+# Compiled object files
+*.o
+*.obj
+
+# Executables
+*.exe
+*.out
+lab1
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Dependency files
+*.d
+
+# IDE files
+.vscode/
+.idea/
+*.pro.user
+*.pro.user.*
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*~
+*.tmp
+*.temp
+*.swp
+*.swo
+
+# Log files
+*.log
